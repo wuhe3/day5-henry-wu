@@ -3,11 +3,9 @@ package com.parkinglot;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class ParkingLot {
     private Map<Ticket, Car> parkingRecords = new HashMap<>();
     private static int vaccancy = 10;
-
 
     public Ticket park(Car car) {
         if (vaccancy == 0) {
@@ -24,9 +22,10 @@ public class ParkingLot {
         if (car != null) {
             parkingRecords.remove(ticket);
             vaccancy++;
-        }
+        } else {System.out.println("Unrecognized parking ticket.");}
+
+
         return car;
     }
-
 
 }
