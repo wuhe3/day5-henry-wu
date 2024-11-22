@@ -5,9 +5,11 @@ import java.util.UUID;
 
 public class Ticket {
     private String ticketId;
+    private final String parkingLogId;
 
-    public Ticket() {
+    public Ticket(String parkingLogId) {
         this.ticketId = UUID.randomUUID().toString();
+        this.parkingLogId = parkingLogId;
     }
 
     public String getTicketId() {
@@ -25,5 +27,9 @@ public class Ticket {
     @Override
     public int hashCode() {
         return Objects.hash(ticketId);
+    }
+
+    public String getParkingLotId() {
+        return parkingLogId;
     }
 }

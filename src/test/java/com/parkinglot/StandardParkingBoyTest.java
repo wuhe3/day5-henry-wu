@@ -8,7 +8,7 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ParkingBoyTest {
+public class StandardParkingBoyTest {
     private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
     @BeforeEach
@@ -71,7 +71,7 @@ public class ParkingBoyTest {
         ParkingLot parkingLot = new ParkingLot();
 
         // When & Then
-        assertThrows(UnrecognizedParkingTicketExpection.class, () -> parkingLot.fetch(new Ticket()));
+        assertThrows(UnrecognizedParkingTicketExpection.class, () -> parkingLot.fetch(new Ticket("wrong")));
     }
 
     @Test
@@ -98,4 +98,25 @@ public class ParkingBoyTest {
         assertThrows(NoAvailablePositionException.class, () -> parkingLot.park(new Car()));
     }
 
+    @Test
+    void should_parked_in_first_park_when_park_given_1_car_and_2_parking_log() {
+        // Given
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
+        standardParkingBoy.assign(parkingLot1);
+        standardParkingBoy.assign(parkingLot2);
+        Car car = new Car();
+
+        // When
+        Ticket ticket = standardParkingBoy.park(car);
+        String parkingLotId = ticket.getParkingLotId();
+
+        // Then
+        assertEquals(parkingLotId, parkingLot1.getParkingLotId());
+    }
 }
+
+
+
+
