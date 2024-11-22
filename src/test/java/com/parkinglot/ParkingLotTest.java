@@ -112,45 +112,36 @@ public class ParkingLotTest {
 
     @Test
     void should_retrun_none_with_error_msg_when_park_given_a_wrong_ticket() {
-        //Given
+        // Given
         ParkingLot parkingLot = new ParkingLot();
 
-        //When
-        parkingLot.fetch(new Ticket());
-
-        //Then
-        assertTrue(systemOut().contains("Unrecognized parking ticket."));
+        // When & Then
+        assertThrows(UnrecognizedParkingTicketExpection.class, () -> parkingLot.fetch(new Ticket()));
     }
 
     @Test
     void should_retrun_none_with_error_msg_when_park_given_a_used_ticket() {
-        //Given
+        // Given
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
         Ticket ticket = parkingLot.park(car);
         parkingLot.fetch(ticket);
 
-        //When
-        parkingLot.fetch(ticket);
-
-        //Then
-        assertTrue(systemOut().contains("Unrecognized parking ticket."));
+        // When & Then
+        assertThrows(UnrecognizedParkingTicketExpection.class, () -> parkingLot.fetch(ticket));
     }
 
     @Test
     void should_return_none_with_error_msg_when_park_given_a_car_and_no_vacancy() {
-        //Given
+        // Given
         ParkingLot parkingLot = new ParkingLot();
-        Car car = new Car();
         for (int i = 0; i < 10; i++) {
             parkingLot.park(new Car());
         }
 
-        //When
-        parkingLot.park(car);
-
-        //Then
-        assertTrue(systemOut().contains("No available position."));
+        // When & Then
+        assertThrows(NoAvailablePositionException.class, () -> parkingLot.park(new Car()));
     }
+
 
 }
