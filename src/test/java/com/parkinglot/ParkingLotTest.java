@@ -9,6 +9,17 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotTest {
+    private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+
+    @BeforeEach
+    public void setup() {
+        System.setOut(new PrintStream(outContent));
+    }
+
+    private String systemOut() {
+        return outContent.toString();
+    }
+
     @Test
     void should_return_a_ticket_when_park_given_a_car() {
         //Given
@@ -103,25 +114,43 @@ public class ParkingLotTest {
     void should_retrun_none_with_error_msg_when_park_given_a_wrong_ticket() {
         //Given
         ParkingLot parkingLot = new ParkingLot();
-        Car car = new Car();
-        Ticket ticket = parkingLot.park(car);
 
         //When
-        Car fetched_car = parkingLot.fetch(new Ticket());
+        parkingLot.fetch(new Ticket());
 
         //Then
         assertTrue(systemOut().contains("Unrecognized parking ticket."));
     }
 
+    @Test
+    void should_retrun_none_with_error_msg_when_park_given_a_used_ticket() {
+        //Given
+        ParkingLot parkingLot = new ParkingLot();
+        Car car = new Car();
+        Ticket ticket = parkingLot.park(car);
+        parkingLot.fetch(ticket);
 
-    private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        //When
+        parkingLot.fetch(ticket);
 
-    @BeforeEach
-    public void setup() {
-        System.setOut(new PrintStream(outContent));
+        //Then
+        assertTrue(systemOut().contains("Unrecognized parking ticket."));
     }
 
-    private String systemOut() {
-        return outContent.toString();
+    @Test
+    void should_return_none_with_error_msg_when_park_given_a_car_and_no_vacancy() {
+        //Given
+        ParkingLot parkingLot = new ParkingLot();
+        Car car = new Car();
+        for (int i = 0; i < 10; i++) {
+            parkingLot.park(new Car());
+        }
+
+        //When
+        parkingLot.park(car);
+
+        //Then
+        assertTrue(systemOut().contains("No available position."));
     }
+
 }

@@ -9,6 +9,7 @@ public class ParkingLot {
 
     public Ticket park(Car car) {
         if (vaccancy == 0) {
+            System.out.println("No available position.");
             return null;
         }
         Ticket ticket = new Ticket();
