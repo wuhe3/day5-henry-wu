@@ -2,8 +2,9 @@ package com.parkinglot;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotTest {
     @Test
@@ -49,6 +50,51 @@ public class ParkingLotTest {
         //Then
         assertEquals(car1, fetched_car1);
         assertEquals(car2, fetched_car2);
+    }
+
+    @Test
+    void should_retrun_none_when_park_given_a_wrong_ticket() {
+        //Given
+        ParkingLot parkingLot = new ParkingLot();
+        Car car = new Car();
+        Ticket ticket = parkingLot.park(car);
+
+        //When
+        Car fetched_car = parkingLot.fetch(new Ticket());
+
+        //Then
+        assertNull(fetched_car);
+    }
+
+    @Test
+    void should_retrun_none_when_park_given_a_used_ticket() {
+        //Given
+        ParkingLot parkingLot = new ParkingLot();
+        Car car = new Car();
+        Ticket ticket = parkingLot.park(car);
+        parkingLot.fetch(ticket);
+
+        //When
+        Car fetched_car = parkingLot.fetch(ticket);
+
+        //Then
+        assertNull(fetched_car);
+    }
+
+    @Test
+    void should_retrun_none_when_park_given_a_car_and_no_vacancy() {
+        //Given
+        ParkingLot parkingLot = new ParkingLot();
+        Car car = new Car();
+        for (int i = 0; i < 10; i++) {
+            parkingLot.park(new Car());
+        }
+
+        //When
+        Ticket ticket = parkingLot.park(car);
+
+        //Then
+        assertNull(ticket);
     }
 
 

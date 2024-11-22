@@ -1,20 +1,26 @@
 package com.parkinglot;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 
 public class ParkingLot {
     private Map<Ticket, Car> parkingRecords = new HashMap<>();
+    private static int vaccancy = 10;
+
 
     public Ticket park(Car car) {
-        Ticket ticket = new Ticket(UUID.randomUUID());
+        if (vaccancy == 0) {
+            return null;
+        }
+        Ticket ticket = new Ticket();
         parkingRecords.put(ticket, car);
+        vaccancy--;
         return ticket;
     }
 
     public Car fetch(Ticket ticket) {
+        parkingRecords.remove(ticket);
         return parkingRecords.get(ticket);
     }
 }
