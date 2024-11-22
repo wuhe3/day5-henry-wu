@@ -98,6 +98,7 @@ public class StandardParkingBoyTest {
         assertThrows(NoAvailablePositionException.class, () -> parkingLot.park(new Car()));
     }
 
+    // story 4 case 1
     @Test
     void should_parked_in_first_park_when_park_given_1_car_and_2_parking_log() {
         // Given
@@ -116,6 +117,7 @@ public class StandardParkingBoyTest {
         assertEquals(parkingLotId, parkingLot1.getParkingLotId());
     }
 
+    // story 4 case 2
     @Test
     void should_parked_in_second_park_when_park_given_1_car_and_2_parking_log_and_first_parking_lot_is_full() {
         // Given
@@ -136,6 +138,82 @@ public class StandardParkingBoyTest {
         // Then
         assertEquals(parkingLotId, parkingLot2.getParkingLotId());
     }
+
+    // story 4 case 3
+    @Test
+    void should_return_right_car_when_park_given_two_parking_lots_and_two_cars() {
+        // Given
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
+        standardParkingBoy.assign(parkingLot1);
+        standardParkingBoy.assign(parkingLot2);
+        Car car1 = new Car();
+        Car car2 = new Car();
+        Ticket ticket1 = standardParkingBoy.park(car1);
+        Ticket ticket2 = standardParkingBoy.park(car2);
+
+        // When
+        Car fetched_car1 = standardParkingBoy.fetch(ticket1);
+        Car fetched_car2 = standardParkingBoy.fetch(ticket2);
+
+        // Then
+        assertEquals(car1, fetched_car1);
+        assertEquals(car2, fetched_car2);
+    }
+
+    // story 4 case 4
+    @Test
+    void should_return_none_with_error_msg_when_park_given_a_wrong_ticket() {
+        // Given
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
+        standardParkingBoy.assign(parkingLot1);
+        standardParkingBoy.assign(parkingLot2);
+        Car car = new Car();
+        Ticket ticket = standardParkingBoy.park(car);
+        standardParkingBoy.fetch(ticket);
+
+        // When & Then
+        assertThrows(UnrecognizedParkingTicketExpection.class, () -> standardParkingBoy.fetch(new Ticket("wrong")));
+    }
+
+    // story 4 case 5
+    @Test
+    void should_return_none_with_error_msg_when_park_given_a_used_ticket() {
+        // Given
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
+        standardParkingBoy.assign(parkingLot1);
+        standardParkingBoy.assign(parkingLot2);
+        Car car = new Car();
+        Ticket ticket = standardParkingBoy.park(car);
+        standardParkingBoy.fetch(ticket);
+
+        // When & Then
+        assertThrows(UnrecognizedParkingTicketExpection.class, () -> standardParkingBoy.fetch(ticket));
+    }
+
+    // story 4 case 6
+    @Test
+    void should_return_none_with_error_msg_when_park_given_a_car_and_no_vacancy_in_both_lots() {
+        // Given
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
+        standardParkingBoy.assign(parkingLot1);
+        standardParkingBoy.assign(parkingLot2);
+        for (int i = 0; i < 10; i++) {
+            parkingLot1.park(new Car());
+            parkingLot2.park(new Car());
+        }
+
+        // When & Then
+        assertThrows(NoAvailablePositionException.class, () -> standardParkingBoy.park(new Car()));
+    }
+
 
 }
 
