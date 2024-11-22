@@ -34,7 +34,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_return_right_car_when_park_given_two_ticket() {
+    void should_return_right_car_when_park_given_two_tickets() {
         //Given
         ParkingLot parkingLot = new ParkingLot();
         Car car1 = new Car();
@@ -48,9 +48,8 @@ public class ParkingLotTest {
 
         //Then
         assertEquals(car1, fetched_car1);
-        assertEquals(car1, fetched_car2);
+        assertEquals(car2, fetched_car2);
     }
-
 
 
 }
