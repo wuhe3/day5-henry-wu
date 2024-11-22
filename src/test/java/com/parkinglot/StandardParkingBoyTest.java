@@ -115,6 +115,28 @@ public class StandardParkingBoyTest {
         // Then
         assertEquals(parkingLotId, parkingLot1.getParkingLotId());
     }
+
+    @Test
+    void should_parked_in_second_park_when_park_given_1_car_and_2_parking_log_and_first_parking_lot_is_full() {
+        // Given
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
+        standardParkingBoy.assign(parkingLot1);
+        standardParkingBoy.assign(parkingLot2);
+        for (int i = 0; i < 10; i++) {
+            parkingLot1.park(new Car());
+        }
+        Car car = new Car();
+
+        // When
+        Ticket ticket = standardParkingBoy.park(car);
+        String parkingLotId = ticket.getParkingLotId();
+
+        // Then
+        assertEquals(parkingLotId, parkingLot2.getParkingLotId());
+    }
+
 }
 
 
