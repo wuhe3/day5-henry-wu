@@ -143,5 +143,16 @@ public class ParkingLotTest {
         assertThrows(NoAvailablePositionException.class, () -> parkingLot.park(new Car()));
     }
 
+    @Test
+    void should_return_ticket_when_park_given_a_car_and_a_parking_boy() {
+        // Given
+        ParkingLot parkingLot = new ParkingLot();
+        Car car = new Car();
 
+        // When
+        Ticket ticket = parkingLot.park(car);
+
+        // Then
+        assertNotNull(ticket);
+    }
 }
