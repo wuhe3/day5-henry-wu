@@ -6,11 +6,14 @@ import java.util.UUID;
 
 public class ParkingLot {
     private Map<Ticket, Car> parkingRecords = new HashMap<>();
-    private static int vaccancy = 10;
+    private int vaccancy = 10; // Make this non-static
     private String parkingLogId;
 
-    public Ticket park(Car car) {
+    public ParkingLot() {
         this.parkingLogId = UUID.randomUUID().toString();
+    }
+
+    public Ticket park(Car car) {
         if (vaccancy == 0) {
             throw new NoAvailablePositionException();
         }
@@ -42,5 +45,4 @@ public class ParkingLot {
     public String getParkingLotId() {
         return parkingLogId;
     }
-
 }
