@@ -4,13 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StandardParkingBoy {
-
     protected List<ParkingLot> parkingLots = new ArrayList<>();
-
-
-    public StandardParkingBoy() {
-
-    }
 
     public void assign(ParkingLot parkingLot) {
         this.parkingLots.add(parkingLot);
