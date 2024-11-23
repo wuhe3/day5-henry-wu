@@ -23,7 +23,7 @@ public class StandardParkingBoyTest {
     @Test
     void should_return_a_ticket_when_park_given_a_car() {
         //Given
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(10);
         Car car = new Car();
 
         //When
@@ -36,7 +36,7 @@ public class StandardParkingBoyTest {
     @Test
     void should_return_a_car_when_park_given_a_ticket() {
         //Given
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(10);
         Car car = new Car();
         Ticket ticket = parkingLot.park(car);
 
@@ -50,7 +50,7 @@ public class StandardParkingBoyTest {
     @Test
     void should_return_right_car_when_park_given_two_tickets() {
         //Given
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(10);
         Car car1 = new Car();
         Car car2 = new Car();
         Ticket ticket1 = parkingLot.park(car1);
@@ -68,7 +68,7 @@ public class StandardParkingBoyTest {
     @Test
     void should_retrun_none_with_error_msg_when_park_given_a_wrong_ticket() {
         // Given
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(10);
 
         // When & Then
         assertThrows(UnrecognizedParkingTicketExpection.class, () -> parkingLot.fetch(new Ticket("wrong")));
@@ -77,7 +77,7 @@ public class StandardParkingBoyTest {
     @Test
     void should_retrun_none_with_error_msg_when_park_given_a_used_ticket() {
         // Given
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(10);
         Car car = new Car();
         Ticket ticket = parkingLot.park(car);
         parkingLot.fetch(ticket);
@@ -89,7 +89,7 @@ public class StandardParkingBoyTest {
     @Test
     void should_return_none_with_error_msg_when_park_given_a_car_and_no_vacancy() {
         // Given
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(10);
         for (int i = 0; i < 10; i++) {
             parkingLot.park(new Car());
         }
@@ -102,8 +102,8 @@ public class StandardParkingBoyTest {
     @Test
     void should_parked_in_first_park_when_park_given_1_car_and_2_parking_log() {
         // Given
-        ParkingLot parkingLot1 = new ParkingLot();
-        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLot parkingLot1 = new ParkingLot(10);
+        ParkingLot parkingLot2 = new ParkingLot(10);
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
         standardParkingBoy.assign(parkingLot1);
         standardParkingBoy.assign(parkingLot2);
@@ -121,8 +121,8 @@ public class StandardParkingBoyTest {
     @Test
     void should_parked_in_second_park_when_park_given_1_car_and_2_parking_log_and_first_parking_lot_is_full() {
         // Given
-        ParkingLot parkingLot1 = new ParkingLot();
-        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLot parkingLot1 = new ParkingLot(10);
+        ParkingLot parkingLot2 = new ParkingLot(10);
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
         standardParkingBoy.assign(parkingLot1);
         standardParkingBoy.assign(parkingLot2);
@@ -143,8 +143,8 @@ public class StandardParkingBoyTest {
     @Test
     void should_return_right_car_when_park_given_two_parking_lots_and_two_cars() {
         // Given
-        ParkingLot parkingLot1 = new ParkingLot();
-        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLot parkingLot1 = new ParkingLot(10);
+        ParkingLot parkingLot2 = new ParkingLot(10);
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
         standardParkingBoy.assign(parkingLot1);
         standardParkingBoy.assign(parkingLot2);
@@ -166,8 +166,8 @@ public class StandardParkingBoyTest {
     @Test
     void should_return_none_with_error_msg_when_park_given_a_wrong_ticket() {
         // Given
-        ParkingLot parkingLot1 = new ParkingLot();
-        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLot parkingLot1 = new ParkingLot(10);
+        ParkingLot parkingLot2 = new ParkingLot(10);
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
         standardParkingBoy.assign(parkingLot1);
         standardParkingBoy.assign(parkingLot2);
@@ -183,8 +183,8 @@ public class StandardParkingBoyTest {
     @Test
     void should_return_none_with_error_msg_when_park_given_a_used_ticket() {
         // Given
-        ParkingLot parkingLot1 = new ParkingLot();
-        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLot parkingLot1 = new ParkingLot(10);
+        ParkingLot parkingLot2 = new ParkingLot(10);
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
         standardParkingBoy.assign(parkingLot1);
         standardParkingBoy.assign(parkingLot2);
@@ -200,8 +200,8 @@ public class StandardParkingBoyTest {
     @Test
     void should_return_none_with_error_msg_when_park_given_a_car_and_no_vacancy_in_both_lots() {
         // Given
-        ParkingLot parkingLot1 = new ParkingLot();
-        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLot parkingLot1 = new ParkingLot(10);
+        ParkingLot parkingLot2 = new ParkingLot(10);
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
         standardParkingBoy.assign(parkingLot1);
         standardParkingBoy.assign(parkingLot2);

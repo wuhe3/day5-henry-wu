@@ -10,8 +10,8 @@ public class SmartParkingBoyTest {
     @Test
     void should_park_in_the_first_parking_lot_when_both_have_same_empty_positions() {
         // Given
-        ParkingLot parkingLot1 = new ParkingLot();
-        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLot parkingLot1 = new ParkingLot(10);
+        ParkingLot parkingLot2 = new ParkingLot(10);
         SmartParkingBoy smartParkingBoy = new SmartParkingBoy();
         smartParkingBoy.assign(parkingLot1);
         smartParkingBoy.assign(parkingLot2);
@@ -29,8 +29,8 @@ public class SmartParkingBoyTest {
     @Test
     void should_park_in_the_parking_lot_with_more_empty_positions_when_park_given_one_car() {
         //Given
-        ParkingLot parkingLot1 = new ParkingLot();
-        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLot parkingLot1 = new ParkingLot(10);
+        ParkingLot parkingLot2 = new ParkingLot(10);
         parkingLot1.park(new Car());
         SmartParkingBoy smartParkingBoy = new SmartParkingBoy();
         smartParkingBoy.assign(parkingLot1);
@@ -49,8 +49,8 @@ public class SmartParkingBoyTest {
     @Test
     void should_return_right_car_when_fetch_given_two_parking_lots_and_two_tickets() {
         // Given
-        ParkingLot parkingLot1 = new ParkingLot();
-        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLot parkingLot1 = new ParkingLot(10);
+        ParkingLot parkingLot2 = new ParkingLot(10);
         SmartParkingBoy smartParkingBoy = new SmartParkingBoy();
         smartParkingBoy.assign(parkingLot1);
         smartParkingBoy.assign(parkingLot2);
@@ -72,8 +72,8 @@ public class SmartParkingBoyTest {
     @Test
     void should_return_none_with_error_msg_when_fetch_given_an_unrecognized_ticket() {
         // Given
-        ParkingLot parkingLot1 = new ParkingLot();
-        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLot parkingLot1 = new ParkingLot(10);
+        ParkingLot parkingLot2 = new ParkingLot(10);
         SmartParkingBoy smartParkingBoy = new SmartParkingBoy();
         smartParkingBoy.assign(parkingLot1);
         smartParkingBoy.assign(parkingLot2);
@@ -86,8 +86,8 @@ public class SmartParkingBoyTest {
     @Test
     void should_return_none_with_error_msg_when_fetch_given_a_used_ticket() {
         // Given
-        ParkingLot parkingLot1 = new ParkingLot();
-        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLot parkingLot1 = new ParkingLot(10);
+        ParkingLot parkingLot2 = new ParkingLot(10);
         SmartParkingBoy smartParkingBoy = new SmartParkingBoy();
         smartParkingBoy.assign(parkingLot1);
         smartParkingBoy.assign(parkingLot2);
@@ -103,8 +103,8 @@ public class SmartParkingBoyTest {
     @Test
     void should_return_none_with_error_msg_when_park_given_no_vacancy_in_both_lots() {
         // Given
-        ParkingLot parkingLot1 = new ParkingLot();
-        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLot parkingLot1 = new ParkingLot(10);
+        ParkingLot parkingLot2 = new ParkingLot(10);
         SmartParkingBoy smartParkingBoy = new SmartParkingBoy();
         smartParkingBoy.assign(parkingLot1);
         smartParkingBoy.assign(parkingLot2);

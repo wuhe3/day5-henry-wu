@@ -23,7 +23,7 @@ public class ParkingLotTest {
     @Test
     void should_return_a_ticket_when_park_given_a_car() {
         //Given
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(10);
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
         Car car = new Car();
 
@@ -37,7 +37,6 @@ public class ParkingLotTest {
     @Test
     void should_return_a_car_when_park_given_a_ticket() {
         //Given
-        ParkingLot parkingLot = new ParkingLot();
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
         Car car = new Car();
         Ticket ticket = standardParkingBoy.park(car);
@@ -52,7 +51,7 @@ public class ParkingLotTest {
     @Test
     void should_return_right_car_when_park_given_two_tickets() {
         //Given
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(10);
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
         Car car1 = new Car();
         Car car2 = new Car();
@@ -71,7 +70,6 @@ public class ParkingLotTest {
     @Test
     void should_retrun_none_with_error_msg_when_park_given_a_wrong_ticket() {
         // Given
-        ParkingLot parkingLot = new ParkingLot();
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
 
         // When & Then
@@ -81,7 +79,7 @@ public class ParkingLotTest {
     @Test
     void should_retrun_none_with_error_msg_when_park_given_a_used_ticket() {
         // Given
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(10);
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
         Car car = new Car();
         Ticket ticket = parkingLot.park(car);
@@ -94,7 +92,6 @@ public class ParkingLotTest {
     @Test
     void should_return_none_with_error_msg_when_park_given_a_car_and_no_vacancy() {
         // Given
-        ParkingLot parkingLot = new ParkingLot();
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
         for (int i = 0; i < 10; i++) {
             standardParkingBoy.park(new Car());
