@@ -45,4 +45,8 @@ public class ParkingLot {
     public String getParkingLotId() {
         return parkingLogId;
     }
+
+    public int getVaccancy() {
+        return vaccancy;
+    }
 }
