@@ -53,8 +53,8 @@ public class ParkingLot {
         return vacancy;
     }
 
-    public int getAvailablePositionRate() {
-        return vacancy / capacity;
+    public double getAvailablePositionRate() {
+        return (double) vacancy / capacity;
     }
 
 
