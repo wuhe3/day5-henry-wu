@@ -15,10 +15,6 @@ public class ParkingBoy {
         this.parkingLots.add(parkingLot);
     }
 
-    public void setParkingStrategy(ParkingStrategy parkingStrategy) {
-        this.parkingStrategy = parkingStrategy;
-    }
-
     public Ticket park(Car car) {
         return parkingStrategy.park(parkingLots, car);
     }
