@@ -6,23 +6,23 @@ import java.util.UUID;
 
 public class ParkingLot {
     private Map<Ticket, Car> parkingRecords = new HashMap<>();
-    private int currentVacancy;
+    private int vacancy;
     private String parkingLogId;
-    private int maxVaccancy;
+    private final int capacity;
 
-    public ParkingLot(int maxVaccancy) {
+    public ParkingLot(int capacity) {
         this.parkingLogId = UUID.randomUUID().toString();
-        this.maxVaccancy = maxVaccancy;
-        this.currentVacancy = maxVaccancy;
+        this.capacity = capacity;
+        this.vacancy = capacity;
     }
 
     public Ticket park(Car car) {
-        if (currentVacancy == 0) {
+        if (vacancy == 0) {
             throw new NoAvailablePositionException();
         }
         Ticket ticket = new Ticket(parkingLogId);
         parkingRecords.put(ticket, car);
-        currentVacancy--;
+        vacancy--;
         return ticket;
     }
 
@@ -30,7 +30,7 @@ public class ParkingLot {
         Car car = parkingRecords.get(ticket);
         if (car != null) {
             parkingRecords.remove(ticket);
-            currentVacancy++;
+            vacancy++;
         } else {
             throw new UnrecognizedParkingTicketExpection();
         }
@@ -38,7 +38,7 @@ public class ParkingLot {
     }
 
     public boolean isFull() {
-        return (currentVacancy == 0);
+        return (vacancy == 0);
     }
 
     public boolean isTicketValid(Ticket ticket) {
@@ -49,12 +49,12 @@ public class ParkingLot {
         return parkingLogId;
     }
 
-    public int getCurrentVacancy() {
-        return currentVacancy;
+    public int getVacancy() {
+        return vacancy;
     }
 
     public int getAvailablePositionRate() {
-        return currentVacancy / maxVaccancy;
+        return vacancy / capacity;
     }
 
 
