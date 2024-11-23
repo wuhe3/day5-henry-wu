@@ -53,5 +53,11 @@ public class ParkingLot {
         return currentVacancy;
     }
 
+    public int getAvailablePositionRate() {
+        return currentVacancy / maxVaccancy;
+    }
+
+
+
 
 }
