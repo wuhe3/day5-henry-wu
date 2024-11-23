@@ -29,7 +29,6 @@ public class SuperParkingBoyTest {
         String parkingLotId = ticket.getParkingLotId();
 
         //Then
-        assertEquals(parkingLot1.getParkingLotId(), parkingLotId);
+        assertEquals(parkingLot2.getParkingLotId(), parkingLotId);
     }
-
 }
