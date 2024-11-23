@@ -10,8 +10,6 @@ public class SuperParkingBoyTest {
         // Given
         ParkingLot parkingLot1 = new ParkingLot(20);
         ParkingLot parkingLot2 = new ParkingLot(15);
-        parkingLot1.park(new Car());
-        parkingLot2.park(new Car());
         SuperParkingBoy superParkingBoy = new SuperParkingBoy();
         superParkingBoy.assign(parkingLot1);
         superParkingBoy.assign(parkingLot2);
