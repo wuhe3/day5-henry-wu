@@ -7,7 +7,7 @@ import java.util.UUID;
 public class ParkingLot {
     private Map<Ticket, Car> parkingRecords = new HashMap<>();
     private int vacancy;
-    private String parkingLogId;
+    private final String parkingLogId;
     private final int capacity;
 
     public ParkingLot(int capacity) {
